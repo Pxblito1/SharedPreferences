@@ -23,7 +23,7 @@ class AcessActivity : AppCompatActivity() {
         val userName = prefs.getName()
         binding.textView.text= "¡Hola $userName!"
         if (prefs.getColorCheck()){
-            binding.constantino.setBackgroundColor(
+            binding.cv2.setBackgroundColor(
                 ContextCompat.getColor(this,R.color.orange)
             )
         }

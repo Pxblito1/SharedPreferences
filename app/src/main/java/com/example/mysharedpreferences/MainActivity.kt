@@ -1,8 +1,12 @@
 package com.example.mysharedpreferences
 
+import android.app.ActionBar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.mysharedpreferences.SharedPreferences.Companion.prefs
 import com.example.mysharedpreferences.databinding.ActivityMainBinding
@@ -15,6 +19,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initUI()
         checkUserValues()
+        val adaptador : ArrayAdapter<*> = ArrayAdapter.createFromResource(
+            this,R.array.colores,android.R.layout.simple_spinner_item
+        )
+        binding.spinner.adapter = adaptador
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ){
+                Toast.makeText(this@MainActivity,"selección: ".plus(position.toString()),
+                    Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent:AdapterView<*>?) {
+                Toast.makeText(this@MainActivity, "sin selección", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
     }
     fun initUI(){
         binding.btniniciar.setOnClickListener {
@@ -37,5 +62,6 @@ class MainActivity : AppCompatActivity() {
     }
     private fun goAccess(){
         startActivity(Intent(this, AcessActivity::class.java))
+
     }
 }
