@@ -22,10 +22,24 @@ class AcessActivity : AppCompatActivity() {
         }
         val userName = prefs.getName()
         binding.textView.text= "¡Hola $userName!"
-        if (prefs.getColorCheck()){
+        if (prefs.getColorCheck()) {
+            val theColor = getMyColor(prefs.getColor())
             binding.cv2.setBackgroundColor(
-                ContextCompat.getColor(this,R.color.orange)
+                ContextCompat.getColor(this, R.color.orange)
             )
         }
+        }
+        fun getMyColor(color:String):Int{
+            val resourceColor = when(color){
+                "lila1"-> R.color.purple_200
+                "lila2"-> R.color.purple_500
+                "lila3"-> R.color.purple_700
+                "teal1"-> R.color.teal_200
+                "teal2"-> R.color.teal_700
+                "negro"-> R.color.black
+                "naranja"-> R.color.orange
+                else ->  R.color.white
+            }
+            return resourceColor
+        }
     }
-}

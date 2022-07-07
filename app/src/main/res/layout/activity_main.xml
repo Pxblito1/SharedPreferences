@@ -11,7 +11,7 @@
         android:id="@+id/cv1"
         android:layout_width="299dp"
         android:layout_height="277dp"
-        android:background="@drawable/redondito"
+        app:cardCornerRadius="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

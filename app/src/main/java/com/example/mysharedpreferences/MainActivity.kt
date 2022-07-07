@@ -13,6 +13,7 @@ import com.example.mysharedpreferences.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var opColor ="amarillo"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -20,8 +21,7 @@ class MainActivity : AppCompatActivity() {
         initUI()
         checkUserValues()
         val adaptador : ArrayAdapter<*> = ArrayAdapter.createFromResource(
-            this,R.array.colores,android.R.layout.simple_spinner_item
-        )
+            this,R.array.colores,android.R.layout.simple_spinner_item )
         binding.spinner.adapter = adaptador
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -30,12 +30,11 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ){
-                Toast.makeText(this@MainActivity,"selección: ".plus(position.toString()),
-                    Toast.LENGTH_SHORT).show()
+                opColor = parent?.getItemAtPosition(position).toString()
             }
 
             override fun onNothingSelected(parent:AdapterView<*>?) {
-                Toast.makeText(this@MainActivity, "sin selección", Toast.LENGTH_SHORT).show()
+                opColor="Amarillo"
             }
         }
 
@@ -54,7 +53,8 @@ class MainActivity : AppCompatActivity() {
     fun accessSharedPreferences(){
         if (binding.etName.text.toString().isNotEmpty()){
             prefs.saveName(binding.etName.text.toString())
-            prefs.saveColor(binding.checkBox.isChecked)
+            prefs.saveCheckColor(binding.checkBox.isChecked)
+            prefs.saveColor(opColor)
             goAccess()
         } else {
             Toast.makeText(this,"Rellena el nombre, porfavore",Toast.LENGTH_SHORT).show()

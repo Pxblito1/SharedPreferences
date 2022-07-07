@@ -10,13 +10,17 @@ import java.sql.Connection
 class Prefs(val context : Context) {
     val DATABASE = "MyDB"
     val USER_NAME = "UserName"
-    val CHECK_COLOR = "Color"
+    val CHECK_COLOR = "Check_Color"
+    val COLOR = "Color"
     val storage = context.getSharedPreferences(DATABASE,Context.MODE_PRIVATE)
     fun saveName (name:String){
         storage.edit().putString(USER_NAME, name).apply()
     }
-    fun saveColor(color:Boolean){
-        storage.edit().putBoolean(CHECK_COLOR,color).apply()
+    fun saveColor(color:String){
+        storage.edit().putString(COLOR,color).apply()
+    }
+    fun saveCheckColor(check:Boolean){
+        storage.edit().putBoolean(CHECK_COLOR, check).apply()
     }
     fun getName():String{
         return storage.getString(USER_NAME,"")!!
@@ -26,6 +30,9 @@ class Prefs(val context : Context) {
     }
     fun wipeData() {
         storage.edit().clear().apply()
+    }
+    fun getColor():String{
+        return storage.getString(COLOR,"Rojo")!!
     }
 
 }
